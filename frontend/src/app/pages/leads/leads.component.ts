@@ -68,8 +68,8 @@ export class LeadsComponent implements OnInit {
       
       // Verifica múltiplas possibilidades
       return leadStatus === selectedStatus ||
-             leadStatus.includes(selectedStatus) ||
-             selectedStatus.includes(leadStatus);
+             this.getEquivalentStatus(leadStatus) === selectedStatus ||
+             this.getEquivalentStatus(selectedStatus) === leadStatus;
     });
   }
 
@@ -134,25 +134,40 @@ export class LeadsComponent implements OnInit {
   }
 
   getStatusColor(status: string): string {
-  if (!status) return '#757575';
-  
-  const statusLower = status.toLowerCase();
-  
-  switch (statusLower) {
-    case 'new':
-    case 'novo': 
-      return '#3f51b5';
-    case 'qualified':
-    case 'qualificado': 
-      return '#ff4081';
-    case 'won':
-    case 'ganho': 
-      return '#4caf50';
-    case 'lost':
-    case 'perdido': 
-      return '#f44336';
-    default: 
-      return '#757575';
+    if (!status) return '#757575';
+    
+    const statusLower = status.toLowerCase();
+    
+    switch (statusLower) {
+      case 'new':
+      case 'novo': 
+        return '#3f51b5';
+      case 'qualified':
+      case 'qualificado': 
+        return '#ff4081';
+      case 'won':
+      case 'ganho': 
+        return '#4caf50';
+      case 'lost':
+      case 'perdido': 
+        return '#f44336';
+      default: 
+        return '#757575';
+    }
   }
+
+  private getEquivalentStatus(status: string): string {
+  const statusMap: {[key: string]: string} = {
+    'new': 'novo',
+    'novo': 'new',
+    'qualified': 'qualificado', 
+    'qualificado': 'qualified',
+    'won': 'ganho',
+    'ganho': 'won',
+    'lost': 'perdido',
+    'perdido': 'lost'
+  };
+  
+  return statusMap[status] || status;
 }
 }

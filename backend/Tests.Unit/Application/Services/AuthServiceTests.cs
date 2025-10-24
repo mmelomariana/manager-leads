@@ -30,7 +30,6 @@ namespace Tests.Unit.Application.Services
                 .AddInMemoryCollection(inMemorySettings)
                 .Build();
 
-            // CORREÇÃO: Ordem dos parâmetros conforme o construtor real
             _authService = new AuthService(_configuration, _mockUserRepository.Object);
         }
 

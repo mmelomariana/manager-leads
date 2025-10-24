@@ -1,71 +1,83 @@
 # 🚀 Lead Manager - CRUD de Leads e Tasks
 
-Sistema completo de **gerenciamento de leads e tarefas** desenvolvido com **Angular 16+** e **.NET 8**, como parte do desafio técnico da **TQS Tecnologia**.  
-Inclui autenticação, testes, paginação e containerização completa via Docker.  
+![Angular](https://img.shields.io/badge/Angular-16+-DD0031?logo=angular&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)
+![CSharp](https://img.shields.io/badge/C%23-8.0-239120?logo=csharp&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker&logoColor=white)
+
+Sistema completo de **gerenciamento de leads e tarefas** desenvolvido com **Angular 16+** e **.NET 8**, atendendo **100% dos requisitos obrigatórios e bônus opcionais** do desafio técnico.
 
 ---
 
 ## 🎯 Objetivo
 
-Criar uma aplicação **full stack** com **CRUD de Leads e Tasks associadas**, validações, feedback visual e arquitetura limpa.
+Criar uma aplicação **Full Stack** com **CRUD de Leads e Tasks associadas**, validações, feedback visual e arquitetura limpa, avaliando clareza, organização e domínio da stack.
 
 ---
 
-## 🧱 Funcionalidades
+## ✅ Requisitos Atendidos
 
-### 🧩 Leads
-- ✅ CRUD completo — criar, listar, editar e excluir  
-- ✅ Filtro por status: `New`, `Qualified`, `Won`, `Lost`  
-- ✅ Busca por nome ou e-mail  
-- ✅ Validações: nome ≥ 3 caracteres e e-mail válido  
+### Funcionalidades Obrigatórias
+- ✅ **Listagem de Leads** com busca e filtro por status (`New`, `Qualified`, `Won`, `Lost`)  
+- ✅ **CRUD completo de Leads** com validações (nome ≥ 3 caracteres e e-mail válido)  
+- ✅ **CRUD completo de Tasks** associadas a cada Lead  
+- ✅ **Formulários reativos** com validação e feedback visual  
+- ✅ **README** com instruções de execução  
 
-### 🗂️ Tasks
-- ✅ CRUD completo — criar, listar, editar e excluir  
-- ✅ Status: `Todo`, `Doing`, `Done`  
-- ✅ Data de vencimento (opcional)  
-- ✅ Associação direta com o Lead  
-
-### 🔐 Autenticação (Bônus)
-- ✅ **JWT** — autenticação segura  
-- ✅ **Auto-registro** — usuário demo criado automaticamente  
-- ✅ **Interceptors** — token incluso automaticamente  
-- ✅ **Guarda de rotas** — acesso protegido no Angular  
-
-### ⚙️ Outros bônus implementados
-- ✅ **Soft Delete** em Leads  
+### Bônus Implementados
+- ✅ **Soft Delete (IsDeleted)** em Leads e Tasks  
 - ✅ **Paginação real** no backend  
-- ✅ **Testes unitários** (xUnit / Jasmine)  
-- ✅ **Containerização** com Docker e Docker Compose  
-- ✅ **Proxy reverso** configurado com **Nginx**
+- ✅ **Autenticação JWT** com guardas de rota e interceptors  
+- ✅ **Criação automática de usuário demo** via interceptor  
+- ✅ **Testes unitários** (xUnit no backend / Jasmine no frontend)  
+- ✅ **Containerização completa** com Docker, Compose e Nginx  
+
+---
+
+## 🧩 Funcionalidades
+
+### Leads
+- CRUD completo (criar, listar, editar, soft delete)  
+- Busca e filtros por status  
+- Paginação real no backend  
+
+### Tasks
+- CRUD completo vinculado ao Lead  
+- Campos: título, status (`Todo`, `Doing`, `Done`) e data de vencimento  
+- Soft delete e ordenação por data  
+
+---
+
+## 🔐 Autenticação Automática (JWT)
+
+O sistema possui um **interceptor inteligente** que permite testar a autenticação JWT **sem precisar se registrar manualmente**.
+
+### 🔹 Como funciona
+1. Ao acessar a aplicação pela primeira vez, o interceptor detecta que não há token JWT válido  
+2. Ele **cria automaticamente um usuário demo** no backend  
+3. Faz o login e armazena o token no `localStorage`  
+4. Todas as requisições subsequentes passam a incluir o token automaticamente  
+
+### 👤 Usuário Demo
+```bash
+Email: demo@leadmanager.com
+Senha: 123456
+```
 
 ---
 
 ## 🛠️ Tecnologias
 
-### 🖥️ Frontend
-- **Angular 16+**  
-- **Angular Material**  
-- **RxJS**  
-- **TypeScript**
-
-### 💾 Backend
-- **.NET 8 (Web API)**  
-- **Entity Framework Core**  
-- **SQLite**  
-- **JWT**  
-- **Swagger**
-
-### ☁️ Infraestrutura
-- **Docker**  
-- **Docker Compose**  
-- **Nginx**
+**Frontend:** Angular 16+, Angular Material, RxJS, TypeScript, Jasmine/Karma  
+**Backend:** .NET 8 (Web API), Entity Framework Core, JWT Authentication, xUnit, Swagger  
+**Infraestrutura:** Docker, Docker Compose, Nginx (proxy reverso)
 
 ---
 
-## 🚀 Como executar
+## 🐳 Como Executar
 
-### 🐳 Opção 1: Docker (Recomendado)
-
+### 🔸 Opção 1: Docker (recomendada)
 ```bash
 # Clone o repositório
 git clone <url-do-repositorio>
@@ -75,20 +87,25 @@ cd leadmanager-docker
 docker compose up --build
 ```
 
-🌐 **Frontend:** [http://localhost:4200](http://localhost:4200)  
-🔗 **Backend (Swagger):** [http://localhost:5209/swagger](http://localhost:5209/swagger)
+🌐 Frontend: http://localhost:4200  
+🔗 Backend (Swagger): http://localhost:5209/swagger  
+
+💡 *O sistema criará automaticamente um usuário demo para autenticação JWT.*
 
 ---
 
-### 💻 Opção 2: Desenvolvimento local
+### 🔸 Opção 2: Desenvolvimento Local
 
 #### Backend (.NET 8)
 ```bash
 cd backend
 dotnet restore
+dotnet ef database update
 dotnet run
 ```
-➡️ API disponível em: [http://localhost:5209](http://localhost:5209)
+
+➡️ API: http://localhost:5209  
+➡️ Swagger: http://localhost:5209/swagger  
 
 #### Frontend (Angular)
 ```bash
@@ -96,115 +113,30 @@ cd frontend
 npm install
 npm start
 ```
-➡️ Aplicação disponível em: [http://localhost:4200](http://localhost:4200)
+
+➡️ Aplicação: http://localhost:4200  
 
 ---
 
-## 🔌 Endpoints da API
+## 🔌 Endpoints Principais
 
-### 📋 Leads
 | Método | Endpoint | Descrição |
-|---------|-----------|-----------|
-| GET | `/api/leads?search=&status=` | Lista com filtros e paginação |
-| GET | `/api/leads/{id}` | Retorna lead e suas tasks |
-| POST | `/api/leads` | Cria um novo lead |
-| PUT | `/api/leads/{id}` | Atualiza um lead |
-| DELETE | `/api/leads/{id}` | Remove (soft delete) |
-
-### ✅ Tasks
-| Método | Endpoint | Descrição |
-|---------|-----------|-----------|
-| GET | `/api/leads/{leadId}/tasks` | Lista tasks do lead |
-| POST | `/api/leads/{leadId}/tasks` | Cria uma task |
-| PUT | `/api/leads/{leadId}/tasks/{taskId}` | Atualiza uma task |
-| DELETE | `/api/leads/{leadId}/tasks/{taskId}` | Exclui uma task |
-
-### 🔐 Autenticação
-| Método | Endpoint | Descrição |
-|---------|-----------|-----------|
-| POST | `/api/auth/register` | Registra um usuário |
-| POST | `/api/auth/login` | Login e geração de token JWT |
-
-👤 **Usuário demo criado automaticamente:**
-```
-Email: demo@leadmanager.com  
-Senha: 123456
-```
+|--------|-----------|-----------|
+| GET | /api/leads?search=&status=&page=1&pageSize=10 | Lista Leads com filtros e paginação |
+| GET | /api/leads/{id} | Retorna Lead e suas Tasks |
+| POST | /api/leads | Cria novo Lead |
+| PUT | /api/leads/{id} | Atualiza Lead |
+| DELETE | /api/leads/{id} | Soft delete de Lead |
+| GET | /api/leads/{leadId}/tasks | Lista Tasks do Lead |
+| POST | /api/leads/{leadId}/tasks | Cria nova Task |
+| PUT | /api/leads/{leadId}/tasks/{id} | Atualiza Task |
+| DELETE | /api/leads/{leadId}/tasks/{id} | Soft delete de Task |
 
 ---
 
-## 🧪 Testes
+## 💻 Autor
 
-```bash
-# Backend
-cd backend
-dotnet test
+**Mariana Melo**  
+Desenvolvedora Full Stack • Angular | .NET | SQL | React Native  
+https://www.linkedin.com/in/mmelomariana/
 
-# Frontend
-cd frontend
-npm test
-```
-
----
-
-## 🧬 Modelagem
-
-### Lead
-```csharp
-public class Lead {
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Email { get; set; } = null!;
-    public LeadStatus Status { get; set; } = LeadStatus.New;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-    public ICollection<TaskItem> Tasks { get; set; } = new List<TaskItem>();
-}
-```
-
-### TaskItem
-```csharp
-public class TaskItem {
-    public int Id { get; set; }
-    public int LeadId { get; set; }
-    public string Title { get; set; } = null!;
-    public DateTime? DueDate { get; set; }
-    public TaskStatus Status { get; set; } = TaskStatus.Todo;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-    public Lead? Lead { get; set; }
-}
-```
-
----
-
-## 🧭 Estrutura do Projeto
-
-```
-/backend
- ├── Controllers
- ├── DTOs
- ├── Entities
- ├── Repositories
- ├── Services
- └── Program.cs
-
-/frontend
- ├── src/app
- │    ├── core
- │    │    ├── models
- │    │    └── services
- │    ├── pages
- │    │    ├── leads
- │    │    └── lead-detail
- │    └── shared
- └── environments
-```
-
----
-
-## 📄 Licença
-
-Este projeto foi desenvolvido como parte do **Desafio Técnico – Angular + .NET Core (CRUD de Leads e Tasks)** da **TQS Tecnologia**.
-
----
