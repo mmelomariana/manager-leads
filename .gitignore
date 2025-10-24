@@ -1,7 +1,4 @@
-﻿# Docker
-leadmanager-docker/
-
-# Backend - .NET
+﻿# Backend - .NET
 backend/bin/
 backend/obj/
 backend/.vs/
