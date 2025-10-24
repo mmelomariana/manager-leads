@@ -1,0 +1,31 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <div class="warning-icon">⚠</div>
+    <h2 class="dialog-title">Confirmar Exclusão</h2>
+  </div>
+  
+  <div class="dialog-content">
+    <p>{{ data.message }}</p>
+    <div class="warning-message">
+      <span class="info-symbol">ℹ</span>
+      <span>Esta ação não pode ser desfeita.</span>
+    </div>
+  </div>
+  
+  <div class="dialog-actions">
+    <button 
+      mat-stroked-button 
+      color="primary" 
+      (click)="onCancel()"
+      class="cancel-btn">
+      Cancelar
+    </button>
+    <button 
+      mat-raised-button 
+      color="warn" 
+      (click)="onConfirm()"
+      class="confirm-btn">
+      Excluir
+    </button>
+  </div>
+</div>

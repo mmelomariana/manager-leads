@@ -1,0 +1,60 @@
+<div class="task-list">
+  <div class="task-header">
+    <h3>Tasks ({{ tasks.length }})</h3>
+    <button 
+      class="btn btn-primary btn-sm"
+      (click)="showTaskForm = true"
+      *ngIf="!showTaskForm && !editingTask"
+    >
+      + Nova Task
+    </button>
+  </div>
+
+  <!-- Formulário de Task -->
+  <app-task-form
+    *ngIf="showTaskForm || editingTask"
+    [task]="editingTask || undefined"
+    (save)="editingTask ? onUpdateTask($event) : onCreateTask($event)"
+    (cancel)="onCancelForm()"
+  ></app-task-form>
+
+  <!-- Lista de Tasks -->
+  <div class="tasks-container" *ngIf="tasks.length > 0; else noTasks">
+    <div class="task-item" *ngFor="let task of tasks">
+      <div class="task-content">
+        <div class="task-title">{{ task.title }}</div>
+        <div class="task-details">
+          <span class="badge" [ngClass]="getStatusBadgeClass(task.status)">
+            {{ getStatusText(task.status) }}
+          </span>
+          <span class="due-date" *ngIf="task.dueDate">
+            {{ task.dueDate | date:'dd/MM/yyyy' }}
+          </span>
+          <span class="created-at">
+            Criada em: {{ task.createdAt | date:'dd/MM/yyyy' }}
+          </span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button 
+          class="btn btn-outline-primary btn-sm"
+          (click)="onEditTask(task)"
+        >
+          Editar
+        </button>
+        <button 
+          class="btn btn-outline-danger btn-sm"
+          (click)="onDeleteTask(task.id)"
+        >
+          Excluir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noTasks>
+    <div class="no-tasks">
+      <p>Nenhuma task cadastrada para este lead.</p>
+    </div>
+  </ng-template>
+</div>

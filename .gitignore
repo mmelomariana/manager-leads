@@ -1,0 +1,52 @@
+﻿# Docker
+leadmanager-docker/
+
+# Backend - .NET
+backend/bin/
+backend/obj/
+backend/.vs/
+backend/Data/
+backend/*.db
+backend/*.db-shm
+backend/*.db-wal
+backend/appsettings.Development.json
+backend/Api/bin/
+backend/Api/obj/
+backend/Application/bin/
+backend/Application/obj/
+backend/Domain/bin/
+backend/Domain/obj/
+backend/Infrastructure/bin/
+backend/Infrastructure/obj/
+backend/Tests.Unit/bin/
+backend/Tests.Unit/obj/
+backend/Migrations/
+
+# Frontend - Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Windows
+Desktop.ini
+
+# User files
+*.user
+*.suo

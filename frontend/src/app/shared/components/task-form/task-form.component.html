@@ -1,0 +1,89 @@
+<div class="task-form-container">
+  <h2 class="form-title">{{ task ? 'Editar Task' : 'Nova Task' }}</h2>
+  
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
+    
+    <!-- Título -->
+    <mat-form-field appearance="outline" class="form-field-full">
+      <mat-label>Título</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="title"
+        placeholder="Digite o título da task"
+      >
+      <mat-icon matSuffix>title</mat-icon>
+      
+      <mat-error *ngIf="title?.errors?.['required'] && title?.touched">
+        Título é obrigatório
+      </mat-error>
+      <mat-error *ngIf="title?.errors?.['minlength'] && title?.touched">
+        Título deve ter pelo menos 3 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Data de Vencimento -->
+    <mat-form-field appearance="outline" class="form-field-full">
+      <mat-label>Data de Vencimento</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="dueDate"
+        placeholder="Escolha uma data"
+      >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      
+      <mat-error *ngIf="dueDate?.errors?.['required'] && dueDate?.touched">
+        Data de vencimento é obrigatória
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Status -->
+    <mat-form-field appearance="outline" class="form-field-full">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="Todo">
+          <span class="status-option">
+            A Fazer
+          </span>
+        </mat-option>
+        <mat-option value="Doing">
+          <span class="status-option">
+            Fazendo
+          </span>
+        </mat-option>
+        <mat-option value="Done">
+          <span class="status-option">
+            Concluído
+          </span>
+        </mat-option>
+      </mat-select>
+      <mat-icon matSuffix>flag</mat-icon>
+    </mat-form-field>
+
+    <!-- Botões -->
+    <div class="form-actions">
+      <button
+        type="button"
+        mat-stroked-button
+        color="warn"
+        (click)="onCancel()"
+        class="cancel-btn"
+      >
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="taskForm.invalid"
+        class="submit-btn"
+      >
+        <mat-icon>{{ task ? 'edit' : 'add' }}</mat-icon>
+        {{ task ? 'Atualizar' : 'Criar' }} Task
+      </button>
+    </div>
+  </form>
+</div>

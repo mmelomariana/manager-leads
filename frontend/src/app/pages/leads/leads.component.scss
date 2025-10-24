@@ -1,0 +1,196 @@
+.status-chip {
+  margin-left: auto;
+  
+  .status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white !important;
+    text-align: center;
+    min-width: 80px;
+    
+    // Garantir que o texto fique branco
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.leads-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.header-toolbar {
+  margin-bottom: 1rem;
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+.success-snackbar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: white;
+}
+
+.filters-card {
+  margin-bottom: 1rem;
+  
+  .filters-content {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    .search-field,
+    .status-field {
+      // Remove o subscript wrapper (espaçamento abaixo do campo)
+      ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+        display: none !important;
+        height: 0 !important;
+        min-height: 0 !important;
+      }
+      
+      // Também ajusta o wrapper principal para compensar
+      ::ng-deep .mat-mdc-form-field-wrapper {
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+      }
+    }
+    
+    .search-field {
+      flex: 1;
+      min-width: 250px;
+    }
+    
+    .status-field {
+      min-width: 150px;
+    }
+  }
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+  
+  p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.leads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.lead-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  mat-card-header {
+    margin-bottom: 1rem;
+    
+    .status-chip {
+      margin-left: auto;
+    }
+  }
+  
+  .lead-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    
+    p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0;
+      font-size: 0.9rem;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    
+    .meta-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  
+  .empty-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    
+    .empty-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: rgba(0, 0, 0, 0.3);
+    }
+    
+    p {
+      margin: 0;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .leads-container {
+    padding: 0.5rem;
+  }
+  
+  .filters-content {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .search-field,
+    .status-field {
+      min-width: auto !important;
+      width: 100%;
+    }
+  }
+  
+  .leads-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .lead-card {
+    mat-card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      
+      .status-chip {
+        margin-left: 0;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}

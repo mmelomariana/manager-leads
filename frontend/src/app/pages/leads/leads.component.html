@@ -1,0 +1,143 @@
+<div class="leads-container">
+  <mat-toolbar color="primary" class="header-toolbar">
+    <span>Leads</span>
+    <span class="spacer"></span>
+    <button 
+      mat-raised-button 
+      color="accent" 
+      (click)="createLead()"
+      class="new-lead-btn">
+      <mat-icon>add</mat-icon>
+      Novo Lead
+    </button>
+  </mat-toolbar>
+
+  <mat-card class="filters-card">
+    <div class="filters-content">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Buscar por nome ou email</mat-label>
+        <input 
+          matInput
+          type="text" 
+          [value]="searchTerm"
+          (input)="onSearchChange($any($event.target).value)">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="status-field">
+        <mat-label>Status</mat-label>
+        <mat-select 
+          [value]="selectedStatus"
+          (selectionChange)="onStatusChange($event.value)">
+          <mat-option value="">Todos os status</mat-option>
+          <mat-option value="Novo">Novo</mat-option>
+          <mat-option value="Qualificado">Qualificado</mat-option>
+          <mat-option value="Ganho">Ganho</mat-option>
+          <mat-option value="Perdido">Perdido</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </mat-card>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="isLoading">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Carregando leads...</p>
+  </div>
+
+  <!-- Leads List - MUDEI: usa filteredLeads ao invés de leads -->
+  <div class="leads-grid" *ngIf="!isLoading">
+    <mat-card 
+      class="lead-card" 
+      *ngFor="let lead of filteredLeads"
+      [class]="'status-' + (lead.status | lowercase)">
+      
+      <mat-card-header>
+        <mat-card-title>{{ lead.name }}</mat-card-title>
+        <mat-card-subtitle>{{ lead.email }}</mat-card-subtitle>
+        
+        <div class="status-chip">
+          <span 
+            class="status-badge"
+            [style.background-color]="getStatusColor(lead.status)">
+            {{ lead.status }}
+          </span>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="lead-meta">
+          <p>
+            <mat-icon class="meta-icon">event</mat-icon>
+            Criado em: {{ lead.createdAt | date:'dd/MM/yyyy' }}
+          </p>
+          <p *ngIf="lead.tasksCount !== undefined && lead.tasksCount !== null">
+            <mat-icon class="meta-icon">assignment</mat-icon>
+            Tasks: {{ lead.tasksCount }}
+          </p>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button 
+          mat-icon-button 
+          color="primary" 
+          (click)="viewLead(lead)"
+          matTooltip="Ver detalhes">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        
+        <button 
+          mat-icon-button 
+          color="accent" 
+          (click)="editLead(lead)"
+          matTooltip="Editar">
+          <mat-icon>edit</mat-icon>
+        </button>
+        
+        <button 
+          mat-icon-button 
+          color="warn" 
+          (click)="deleteLead(lead)"
+          matTooltip="Excluir">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+
+  <!-- Empty State - MUDEI: usa filteredLeads ao invés de leads -->
+  <mat-card class="empty-state" *ngIf="!isLoading && filteredLeads.length === 0">
+    <mat-card-content>
+      <div class="empty-content">
+        <mat-icon class="empty-icon">inbox</mat-icon>
+        
+        <p *ngIf="searchTerm || selectedStatus">
+          Nenhum lead encontrado com os filtros aplicados.
+        </p>
+        <p *ngIf="!searchTerm && !selectedStatus">
+          Nenhum lead encontrado.
+        </p>
+        
+        <button 
+          mat-raised-button 
+          color="primary" 
+          (click)="clearFilters()"
+          *ngIf="searchTerm || selectedStatus">
+          Limpar filtros
+        </button>
+        
+        <button 
+          mat-raised-button 
+          color="primary" 
+          (click)="createLead()"
+          *ngIf="!searchTerm && !selectedStatus">
+          <mat-icon>add</mat-icon>
+          Criar primeiro lead
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

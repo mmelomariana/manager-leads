@@ -1,0 +1,33 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #3f51b5;
+
+  h1 {
+    color: #3f51b5;
+    margin: 0;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #3f51b5;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+
+    &:hover, &.active {
+      background-color: #3f51b5;
+      color: white;
+    }
+  }
+}

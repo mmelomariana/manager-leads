@@ -1,0 +1,113 @@
+<div class="detail-container" *ngIf="lead">
+  <!-- Header -->
+  <div class="header">
+    <button mat-stroked-button color="primary" (click)="onBack()" class="btn-back">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar para Leads
+    </button>
+    <h2>Detalhes do Lead: {{ lead.name }}</h2>
+  </div>
+
+  <!-- Informações do Lead -->
+  <mat-card class="lead-info-card">
+    <mat-card-header>
+      <mat-card-title>Informações do Lead</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Nome:</label>
+          <span>{{ lead.name }}</span>
+        </div>
+        <div class="info-item">
+          <label>Email:</label>
+          <span>{{ lead.email }}</span>
+        </div>
+        <div class="info-item">
+          <label>Status:</label>
+          <div class="status-chip">
+            <span 
+              class="status-badge"
+              [style.background-color]="getStatusColor(lead.status)">
+              {{ lead.status }}
+            </span>
+          </div>
+        </div>
+        <div class="info-item">
+          <label>Criado em:</label>
+          <span>{{ lead.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Tasks Section -->
+  <mat-card class="tasks-card">
+    <mat-card-header>
+      <div class="tasks-header">
+        <mat-card-title>Tasks ({{ tasks.length }})</mat-card-title>
+        <span class="spacer"></span>
+        <button 
+          *ngIf="!showTaskForm"
+          mat-raised-button 
+          color="primary" 
+          (click)="showTaskForm = true">
+          <mat-icon>add</mat-icon>
+          Nova Task
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Task Form -->
+      <div class="task-form" *ngIf="showTaskForm">
+        <h4>{{ editingTask ? 'Editar Task' : 'Nova Task' }}</h4>
+        <app-task-form
+          [task]="editingTask || undefined"
+          (save)="onTaskSave($event)"
+          (cancel)="cancelTaskForm()">
+        </app-task-form>
+      </div>
+
+      <!-- Tasks List -->
+      <div class="tasks-list">
+        <mat-card *ngFor="let task of tasks" class="task-card">
+          <mat-card-content>
+            <div class="task-content">
+              <h4>{{ task.title }}</h4>
+              <div class="task-meta">
+                <div class="status-chip">
+                  <span 
+                    class="status-badge"
+                    [style.background-color]="getStatusColor(getTaskStatusText(task.status))">
+                    {{ getTaskStatusText(task.status) }}
+                  </span>
+                </div>
+                <span class="task-due-date" *ngIf="task.dueDate">
+                  Vence: {{ task.dueDate | date:'dd/MM/yyyy' }}
+                </span>
+                <span class="task-created">
+                  Criada: {{ task.createdAt | date:'dd/MM/yyyy' }}
+                </span>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions class="task-actions">
+            <button mat-button color="primary" (click)="editTask(task)">
+              <mat-icon>edit</mat-icon>
+              Editar
+            </button>
+            <button mat-button color="warn" (click)="deleteTask(task.id)">
+              <mat-icon>delete</mat-icon>
+              Excluir
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        <div class="empty-state" *ngIf="tasks.length === 0">
+          <p>Nenhuma task encontrada.</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,15 @@
+﻿**/.dockerignore
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/*.bak
+**/*.swp
+**/bin
+**/obj
+**/logs
+**/node_modules
+Dockerfile*
+docker-compose*
+.docker
+README.md
