@@ -16,6 +16,8 @@ Criar uma aplicação **Full Stack** com **CRUD de Leads e Tasks associadas**, v
 
 ---
 
+## Link do vídeo do projeto sendo executado: https://l1nq.com/9qfyo6z
+
 ## ✅ Requisitos Atendidos
 
 ### Funcionalidades Obrigatórias
