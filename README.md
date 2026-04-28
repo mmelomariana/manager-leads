@@ -18,9 +18,7 @@ Criar uma aplicação **Full Stack** com **CRUD de Leads e Tasks associadas**, v
 
 ## Link do vídeo do projeto sendo executado: https://l1nq.com/9qfyo6z
 
-## ✅ Requisitos Atendidos
-
-### Funcionalidades Obrigatórias
+### Funcionalidades 
 - ✅ **Listagem de Leads** com busca e filtro por status (`New`, `Qualified`, `Won`, `Lost`)  
 - ✅ **CRUD completo de Leads** com validações (nome ≥ 3 caracteres e e-mail válido)  
 - ✅ **CRUD completo de Tasks** associadas a cada Lead  
@@ -36,8 +34,6 @@ Criar uma aplicação **Full Stack** com **CRUD de Leads e Tasks associadas**, v
 - ✅ **Containerização completa** com Docker, Compose e Nginx  
 
 ---
-
-## 🧩 Funcionalidades
 
 ### Leads
 - CRUD completo (criar, listar, editar, soft delete)  
