@@ -16,7 +16,7 @@ Criar uma aplicação **Full Stack** com **CRUD de Leads e Tasks associadas**, v
 
 ---
 
-## Link do vídeo do projeto sendo executado: https://l1nq.com/9qfyo6z
+Link do vídeo do projeto em execução: https://l1nq.com/9qfyo6z e print dos Testes Unitários: https://l1nk.dev/mrh1nsl & https://l1nk.dev/tdfxfwx
 
 ### Funcionalidades 
 - ✅ **Listagem de Leads** com busca e filtro por status (`New`, `Qualified`, `Won`, `Lost`)  
